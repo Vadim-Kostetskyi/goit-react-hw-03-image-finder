@@ -8,18 +8,9 @@ import { ColorRing } from 'react-loader-spinner';
 
 class ImageFinder extends Component {
   state = {
-    URL: 'https://pixabay.com/api/?q=cat&page=1&key=your_key&image_type=photo&orientation=horizontal&per_page=12',
+    // URL: 'https://pixabay.com/api/?q=cat&page=1&key=your_key&image_type=photo&orientation=horizontal&per_page=12',
     baseUrl: 'https://pixabay.com/api/',
     key: '32447292-607f396f27b1a7487e1dc502e',
-    // q,
-    // page,
-    // key,
-    // image_type,
-    // orientation,
-    // per_page,
-    // id,
-    // webformatURL,
-    // largeImageURL,
     imageNameInput: '',
     page: 1,
     per_page: 12,
@@ -30,11 +21,6 @@ class ImageFinder extends Component {
     largeImageUrl: '',
     status: 'idle',
   };
-  idle;
-  panding;
-  resolved;
-  resolvedAllPic;
-  reject;
 
   componentDidUpdate(prevState, prevProps) {
     if (
@@ -42,7 +28,6 @@ class ImageFinder extends Component {
       (prevProps.imageNameInput === this.state.imageNameInput &&
         this.state.LoadMorePics === false)
     ) {
-      console.log('er');
       return;
     }
     if (
@@ -100,6 +85,13 @@ class ImageFinder extends Component {
     this.setState({ isModalOpen: false });
   };
 
+  keyDown = event => {
+    console.log(event.key);
+    if (event.key === 'Escape') {
+      console.log(123123);
+    }
+  };
+
   render() {
     const { images, status, largeImageUrl, isModalOpen } = this.state;
 
@@ -123,6 +115,7 @@ class ImageFinder extends Component {
             <ModalWindow
               largeImage={largeImageUrl}
               closeModal={this.closeModalWindow}
+              keyDown={this.keyDown}
             />
           )}
         </div>

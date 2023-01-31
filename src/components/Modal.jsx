@@ -1,6 +1,14 @@
-const ModalWindow = ({ largeImage, closeModal }) => {
+const ModalWindow = ({ largeImage, closeModal, keyDown }) => {
   return (
-    <div className="overlay" onClick={() => closeModal()} onKeyDown={1}>
+    <div
+      className="overlay"
+      onClick={() => closeModal()}
+      onKeyDown={ev => {
+        if (ev.key === 'Escape') {
+          closeModal();
+        }
+      }}
+    >
       <div className="modal">
         <img src={largeImage} alt="" />
       </div>

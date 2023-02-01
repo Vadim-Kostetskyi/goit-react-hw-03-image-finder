@@ -55,7 +55,6 @@ class ImageFinder extends Component {
       })
       .then(data => {
         const imageArray = data.hits;
-        console.log(imageArray.length);
 
         this.state.images
           ? this.setState({ images: [...this.state.images, ...imageArray] })
@@ -63,7 +62,6 @@ class ImageFinder extends Component {
 
         if (imageArray.length === 0) {
           alert(` Забражень з назвою ${this.state.imageNameInput}не знайдено`);
-          console.log(23233223);
           this.setState({ status: 'idle' });
           return;
         }

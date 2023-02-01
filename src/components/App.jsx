@@ -85,13 +85,6 @@ class ImageFinder extends Component {
     this.setState({ isModalOpen: false });
   };
 
-  keyDown = event => {
-    console.log(event.key);
-    if (event.key === 'Escape') {
-      console.log(123123);
-    }
-  };
-
   render() {
     const { images, status, largeImageUrl, isModalOpen } = this.state;
 

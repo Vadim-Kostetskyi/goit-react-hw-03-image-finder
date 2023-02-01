@@ -55,13 +55,23 @@ class ImageFinder extends Component {
       })
       .then(data => {
         const imageArray = data.hits;
+        console.log(imageArray.length);
 
         this.state.images
           ? this.setState({ images: [...this.state.images, ...imageArray] })
           : this.setState({ images: imageArray });
-        imageArray.length < 12
-          ? this.setState({ status: 'resolvedAllPic' })
-          : this.setState({ status: 'resolved' });
+
+        if (imageArray.length === 0) {
+          alert(` Забражень з назвою ${this.state.imageNameInput}не знайдено`);
+          console.log(23233223);
+          this.setState({ status: 'idle' });
+          return;
+        }
+        if (imageArray.length < 12) {
+          this.setState({ status: 'resolvedAllPic' });
+          return;
+        }
+        this.setState({ status: 'resolved' });
       })
       .catch(error => console.log(error));
     this.setState({ LoadMorePics: false });

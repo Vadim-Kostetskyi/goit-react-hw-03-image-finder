@@ -23,6 +23,9 @@ class ImageFinder extends Component {
   };
 
   componentDidUpdate(prevState, prevProps) {
+    const { baseUrl, key, imageNameInput, page, per_page } = this.state;
+    let pageNumber = page;
+
     if (
       prevProps.images !== this.state.images ||
       (prevProps.imageNameInput === this.state.imageNameInput &&
@@ -34,20 +37,21 @@ class ImageFinder extends Component {
       prevProps.imageNameInput &&
       prevProps.imageNameInput !== this.state.imageNameInput
     ) {
-      this.setState({ images: [], status: 'panding' });
+      this.setState({ images: [], page: 1, status: 'panding' });
+      pageNumber = 1;
     }
     if (!this.state.images) {
       this.setState({ status: 'panding' });
     }
 
-    const { baseUrl, key, imageNameInput, page, per_page } = this.state;
     const imageName = imageNameInput.trim();
     if (!imageName) {
       alert('Введіть назву картинки');
       this.setState({ status: 'idle' });
       return;
     }
-    const url = `${baseUrl}?q=${imageName}&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=${per_page}`;
+    const url = `${baseUrl}?q=${imageName}&page=${pageNumber}&key=${key}&image_type=photo&orientation=horizontal&per_page=${per_page}`;
+    console.log(page);
 
     fetch(url)
       .then(response => {

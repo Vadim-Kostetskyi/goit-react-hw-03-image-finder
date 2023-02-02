@@ -51,7 +51,6 @@ class ImageFinder extends Component {
       return;
     }
     const url = `${baseUrl}?q=${imageName}&page=${pageNumber}&key=${key}&image_type=photo&orientation=horizontal&per_page=${per_page}`;
-    console.log(page);
 
     fetch(url)
       .then(response => {
